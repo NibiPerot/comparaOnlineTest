@@ -5,11 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="libraries/bootstrap.min.css">
 </head>
 <body>
 
-    <button onClick="updatePrice(products)">Update Price</button>
-    <div id="products"></div>
+    <div class="container start">
+        <h2>Presiona el Boton Para Poder Visualizar Los Datos</h2>
+        <button type="button" class="btn btn-block" onClick="updatePrice(products)">Update Price</button>
+    </div>
+
+        
+    <div class="container second" style="display:none">
+        <h2></h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>SellIn</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="container second" style="display:none">
+        <button type="button" class="btn" onClick="updatePrice(products)">Update Price</button>            
+    </div>
+
     <script src="libraries/jquery.min.js"></script>
     <script src="js/index.js"></script>
 </body>

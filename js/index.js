@@ -1,99 +1,4 @@
 /**
- * Pure function to ensure not negative days and
- * update days associated to product's sellIn property 
- */
-const sellInDays = (day) => {
-    return day <= 0 ? day = 0 : day = day - 1 
-}
-
-/**
- * Pure function to handle Mega Coverage bussiness rules, 
- * this function use product's price to handle their properties
- */
-const megaCoverage = price => price
-
-/**
- * Pure function to handle Full Coverage bussiness rules, 
- * this function use product's price to handle their properties
- */
-const fullCoverage = (price) => {
-    price == 0 ? price = 0: price = price + 2
-    return price
-}
-
-/**
- * Pure function to handle Low and Medium Coverage bussiness rules, 
- * this function use product's price to handle their properties
- */
-const lowMediumCoverage = (price) => {
-    price <= 0 ? price = 0: price = price - 1
-    return price 
-}
-
-
-/**
- * Pure function to handle when price is zero
- *  in case of Special Full Coverage 
- */
-const specialFullCoverageZero = price => 0
-
-/**
- * Pure function to handle when price more than 10
- *  in case of Special Full Coverage 
- */
-const specialFullCoverageMoreThanTen = (price) => {
-    price == 0 ? price = 0: price = price - 1
-    return price
-}
-
-/**
- * Pure function to handle when price less than 5 but
- * more than 0 in case of Special Full Coverage 
- */
-const specialFullCoverageLessThanFive = (price) => {
-    price = price - 3
-    price < 0 ? price = 0 : price 
-    return price
-}
-
-/**
- * Pure function to handle when price is between 5 and 10
- *  in case of Special Full Coverage 
- */
-const specialFullCoverageFiveToTen = (price) => {
-    price = price - 2
-    price < 0 ? price = 0 : price 
-    return price
-}
-
-/**
- * Function to handle Special Full Coverage bussiness rules, 
- * this function use product to handle their properties
- */
-const specialFullCoverage = (product) => {
-    if(product.sellIn > 10 && product.price != 0){
-        product.price = specialFullCoverageMoreThanTen(product.price)
-    }else{
-        if(product.sellIn == 0 ){
-            product.price = specialFullCoverageZero(product.price)
-        }else{
-            product.sellIn < 5 ? product.price = specialFullCoverageLessThanFive(product.price) 
-                               : product.price = specialFullCoverageFiveToTen(product.price)
-        }
-    }
-    return product 
-}
-
-/**
- * Pure function to handle Super Sale Coverage bussiness rules, 
- * this function use product's price to handle their properties
- */
-const superSale = (price) => {
-    price == 0 ? price = 0: price = price - 2
-    return price
-}
-
-/**
  * Example of Products Object
  * Added coverage properties to handle coverage
  *  without need of asking to compare strings
@@ -111,10 +16,18 @@ let products = [
     { coverage: 1, name : 'Low Coverage', sellIn: 5, price: 7},
     { coverage: 4, name : 'Mega Coverage', sellIn: -1, price: 80},
     { coverage: 5, name : 'Special full Coverage', sellIn: 15, price: 20},
-    { coverage: 5, name : 'Special full Coverage', sellIn: 10, price: 49},
-    { coverage: 5, name : 'Special full Coverage', sellIn: 5, price: 49},
+    { coverage: 5, name : 'Special full Coverage', sellIn: 10, price: 20},
+    { coverage: 5, name : 'Special full Coverage', sellIn: 5, price: 20},
     { coverage: 6, name : 'Super Sale', sellIn: 3, price: 6}
 ]
+
+/**
+ * jQuery function to see the result table for first time 
+ */
+$('.start button').click(function(){
+    $('.start').hide()
+    $('.second').show()
+})
 
 /**
  * Start at day zero to start changing values of 
@@ -122,23 +35,109 @@ let products = [
  */
 let day = 0
 
-/**
- * Function to render elements on view
- * using jQuery function append()
- */
-const showUpdatedProducts = (products, day) => {
-    $('#products').append('<h3>Day ' + day + '</h3>')
-
-    products.map( product => {
-        $('#products').append('<p>'+ product.name + ' , '+ product.sellIn + ' , '+ product.price +' </p>')        
-    })
-}
 
 /**
  * Pure function to increment day on one 
  *  
  */
-const addDay = day => day + 1
+const addDay = number => number + 1
+
+
+/**
+ * Pure function decrease number in one and not allow negative numbers 
+ */
+const decreaseOne = (number) => {
+    number = number - 1 
+    number <= 0 ? number = 0 : number
+    return number
+}
+
+/**
+ * Pure function decrease number in two and not allow negative numbers 
+ */
+const decreaseTwo = (number) => {
+    number = number -2
+    number <= 0 ? number = 0 : number
+    return number
+}
+
+/**
+ * Pure function increase number in one  and do not allow numbers 
+ * validating that number is lower than 51
+ */
+const increaseOne = (number) => {
+    number = number + 1
+    number > 50 ? number = 50 : number         
+    return number 
+}
+
+/**
+ * Pure function increase number in two  and do not allow numbers 
+ * validating that number is lower than 51
+ */
+const increaseTwo = (number) => {
+    number = number + 2
+    number > 50 ? number = 50 : number     
+    return number
+}
+
+/**
+ * Pure function increase number in three  and do not allow numbers 
+ * validating that number is lower than 51
+ */
+const increaseThree = (number) => {
+    number = number + 3
+    number > 50 ? number = 50 : number     
+    return number
+}
+
+
+/**
+ * Pure function to handle Mega Coverage bussiness rules, 
+ * this function use product's price to handle their properties
+ */
+const returnSame = number => number
+
+
+/**
+ * Pure function to return zero any time 
+ */
+const returnZero = number => 0
+
+
+/**
+ * Function to handle Special Full Coverage bussiness rules, 
+ * this function use product to handle their properties
+ */
+const specialFullCoverage = (product) => {
+    if(product.sellIn > 10 && product.price != 0){
+        product.price = increaseOne(product.price)
+    }else{
+        if(product.sellIn == 0 ){
+            product.price = returnZero(product.price)
+        }else{
+            product.sellIn < 5 ? product.price = increaseThree(product.price) 
+                               : product.price = increaseTwo(product.price)
+        }
+    }
+    return product 
+}
+
+
+/**
+ * Function to render elements on view
+ * using jQuery function append()
+ */
+const showUpdatedProducts = (products, day) => {
+    $('h2').empty()
+    $('tbody').empty()
+    $('h2').append('Day ' + day)
+
+    products.map( product => {
+        $('tbody').append('<tr><td>' + product.name + '</td><td>' + product.sellIn + '</td><td>' + product.price + '</td></tr>')
+             
+    })
+}
 
 
 /**
@@ -146,10 +145,11 @@ const addDay = day => day + 1
  * using underscorejs function _.map() to fetch products
  */
 const updatePrice = (products) => {
+    $('.container.second').show()
     products.map( product => {
 
         product.coverage == 4 ? product.sellIn = product.sellIn 
-                              : product.sellIn = sellInDays(product.sellIn)
+                              : product.sellIn = decreaseOne(product.sellIn)
         /**
          * Check products according to their coverage value,
          * the coverage is going to call their bussiness rules and change  
@@ -158,26 +158,26 @@ const updatePrice = (products) => {
         
         switch(product.coverage) {
             case 1:
-                product.price = lowMediumCoverage(product.price)
+                product.price = decreaseOne(product.price)
                 break;
             case 2:
-                product.price = lowMediumCoverage(product.price)            
+                product.price = decreaseOne(product.price)
                 break;
             case 3:
-                product.price = fullCoverage(product.price)            
+                product.price = addDay(product.price)          
                 break;
             case 4:
-                product.price = megaCoverage(product.price)            
+                product.price = returnSame(product.price)
                 break;
             case 5:
-                product = specialFullCoverage(product)            
+                product = specialFullCoverage(product)
                 break;
             case 6:
-                product.price = superSale(product.price)            
+                product.price = decreaseTwo(product.price)    
                 break;
 
             default:
-                console.log('not a valid product coverage')
+                console.log('not a valid product coverage number')
         }
     })
     
@@ -185,12 +185,3 @@ const updatePrice = (products) => {
     day = addDay(day)
     showUpdatedProducts(products, day)
 }
-
-/**
- * Functional Programming
- * Pure Functions all that it does depends on their arguments, guarantee alway get the same
- * result if i put the same 
- * Safe State
- * First Class State
- * Modularity
- */
