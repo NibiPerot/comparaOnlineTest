@@ -3,6 +3,7 @@ This project was solved using the functional programming approach, this is the r
 
 Additionally the object product has a new property called coverage (that is a number that represent the name of the product), this is because the original structure force us to select the bussiness rules according to the name, and that is not the best option to have a clean code.
 
+Bussiness rules are explained on Rules.md
 
 ## Project
 In order to run the project you must have ([npm](https://www.npmjs.com/))installed,once you have it you could go to terminal and find the project folder and put the next command:
